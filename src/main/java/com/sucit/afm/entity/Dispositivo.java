@@ -1,6 +1,7 @@
 package com.sucit.afm.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "dispositivo")
@@ -13,6 +14,14 @@ public class Dispositivo {
     private String imei;
     private String tipo;
     private String status;
+    @ManyToMany
+    @JoinTable(
+            name = "dispositivo_usuario",
+            joinColumns = @JoinColumn(name = "dispositivo_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    )
+    private List<Usuario> usuarios;
+
 
     public int getId() {
         return id;

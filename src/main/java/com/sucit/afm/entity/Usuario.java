@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -20,8 +21,12 @@ public class Usuario {
     private LocalDate ultimaAtualizacao;
     private String status;
     private String obs;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @ManyToMany
+    @JoinTable(
+            name = "dispositivo_usuario",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "dispositivo_id")
+    )
     private List<Dispositivo> dispositivos;
 
 

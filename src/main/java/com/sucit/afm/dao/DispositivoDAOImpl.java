@@ -12,8 +12,16 @@ import java.util.List;
 @Repository
 public class DispositivoDAOImpl implements DispositivoDAO{
 
-    @Autowired
+
     private EntityManager entityManager;
+
+    @Autowired
+    public DispositivoDAOImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public DispositivoDAOImpl() {
+    }
 
     @Override
     public List<Dispositivo> listarTodos() {
