@@ -14,13 +14,17 @@ public class Dispositivo {
     private String imei;
     private String tipo;
     private String status;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "dispositivo_usuario",
             joinColumns = @JoinColumn(name = "dispositivo_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
     private List<Usuario> usuarios;
+
+    public Dispositivo() {
+
+    }
 
 
     public int getId() {
@@ -63,8 +67,12 @@ public class Dispositivo {
         this.status = status;
     }
 
-    public Dispositivo() {
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
 
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public Dispositivo(String numero, String imei, String tipo, String status) {

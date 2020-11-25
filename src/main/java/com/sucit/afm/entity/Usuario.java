@@ -20,8 +20,7 @@ public class Usuario {
     @Column(name = "ultima_atualizacao")
     private LocalDate ultimaAtualizacao;
     private String status;
-    private String obs;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "dispositivo_usuario",
             joinColumns = @JoinColumn(name = "usuario_id"),
@@ -48,7 +47,6 @@ public class Usuario {
         this.dataDeCriacao = dataDeCriacao;
         this.ultimaAtualizacao = ultimaAtualizacao;
         this.status = status;
-        this.obs = obs;
         this.dispositivos = dispositivos;
     }
 
@@ -62,7 +60,6 @@ public class Usuario {
                 ", dataDeCriacao=" + dataDeCriacao +
                 ", ultimaAtualizacao=" + ultimaAtualizacao +
                 ", status='" + status + '\'' +
-                ", obs='" + obs + '\'' +
                 ", dispositivos=" + dispositivos +
                 '}';
     }
@@ -121,14 +118,6 @@ public class Usuario {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getObs() {
-        return obs;
-    }
-
-    public void setObs(String obs) {
-        this.obs = obs;
     }
 
     public List<Dispositivo> getDispositivos() {

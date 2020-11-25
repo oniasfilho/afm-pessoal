@@ -1,31 +1,33 @@
-CREATE TABLE dispositivo (
-	id SERIAL, 
-	numero VARCHAR(11), 
-	imei VARCHAR(15) NOT NULL, 
-	tipo VARCHAR(1) NOT NULL, 
-	status VARCHAR(1),
-	usuario_id integer 
-	PRIMARY KEY (id)
-	FOREIGN KEY (usuario_id) REFERENCES usuario(id);
-);
-
 
 CREATE TABLE usuario (
-	id SERIAL, 
-	cpf VARCHAR(11) NOT NULL, 
-	nome VARCHAR(70) NOT NULL, 
-	email VARCHAR(254), 
-	data_de_criacao DATE, 
-	ultima_atualizacao TIMESTAMP(6) WITHOUT TIME ZONE, 
-	status VARCHAR(1),  
-	UNIQUE (cpf),
-	PRIMARY KEY (id)
+  id SERIAL,
+  cpf varchar(11),
+  nome varchar(70),
+  email varchar(254),
+  data_de_criacao DATE,
+  ultima_atualizacao DATE,
+  status varchar(1),
+
+  PRIMARY KEY (id),
+  UNIQUE (cpf)
+);
+
+CREATE TABLE dispositivo (
+  id SERIAL,
+  numero varchar(20),
+  imei varchar(15),
+  tipo varchar(1),
+  status varchar(1),
+
+  PRIMARY KEY (id),
+  UNIQUE (imei)
 );
 
 CREATE TABLE dispositivo_usuario(
-	dispositivo_id integer,
-	usuario_id integer,
-	PRIMARY KEY (dispositivo_id, usuario_id),
-	FOREIGN KEY (dispositivo_id) REFERENCES dispositivo(id),
-	FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+  dispositivo_id integer NOT NULL,
+  usuario_id integer NOT NULL,
+
+  PRIMARY KEY(dispositivo_id, usuario_id),
+  FOREIGN KEY(dispositivo_id) REFERENCES dispositivo(id),
+  FOREIGN KEY(usuario_id) REFERENCES usuario(id)
 );
