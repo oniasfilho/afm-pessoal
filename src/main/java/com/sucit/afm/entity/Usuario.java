@@ -31,6 +31,7 @@ public class Usuario {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "dispositivo_id")
     )
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Dispositivo> dispositivos;
 
 
