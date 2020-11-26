@@ -1,5 +1,7 @@
 package com.sucit.afm.entity;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class Dispositivo {
             joinColumns = @JoinColumn(name = "dispositivo_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Usuario> usuarios;
 
     public Dispositivo() {

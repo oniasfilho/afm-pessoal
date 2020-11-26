@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class DispositivoRestController {
-
 
     private DispositivoService service;
 
@@ -19,12 +17,12 @@ public class DispositivoRestController {
         this.service = service;
     }
 
-    @GetMapping("/dispositivos")
+    @GetMapping("/api/dispositivos")
     public List<Dispositivo> listarTodos(){
         return service.listarTodos();
     }
 
-    @GetMapping("/dispositivos/{dispositivoId}")
+    @GetMapping("/api/dispositivos/{dispositivoId}")
     public Dispositivo buscaDispositivo(@PathVariable int dispositivoId){
         Dispositivo d1 = service.acharPorId(dispositivoId);
 
@@ -35,7 +33,7 @@ public class DispositivoRestController {
         return d1;
     }
 
-    @PostMapping("/dispositivos")
+    @PostMapping("/api/dispositivos")
     public Dispositivo salvarDispositivo(@RequestBody Dispositivo dispositivo){
         dispositivo.setId(0);
 
@@ -44,14 +42,14 @@ public class DispositivoRestController {
     }
 
 
-    @PutMapping("/dispositivos")
+    @PutMapping("/api/dispositivos")
     public Dispositivo atualizaDispositivo(@RequestBody Dispositivo dispositivo){
 
         service.salvar(dispositivo);
         return dispositivo;
     }
 
-    @DeleteMapping("/dispositivos/{dispositivoId}")
+    @DeleteMapping("/api/dispositivos/{dispositivoId}")
     public int deletaDispositivo(@PathVariable int dispositivoId){
 
         service.deletarPorId(dispositivoId);
