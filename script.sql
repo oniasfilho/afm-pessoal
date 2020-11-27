@@ -33,3 +33,14 @@ CREATE TABLE dispositivo_usuario(
   FOREIGN KEY(dispositivo_id) REFERENCES dispositivo(id),
   FOREIGN KEY(usuario_id) REFERENCES usuario(id)
 );
+
+
+INSERT INTO usuario
+(cpf, nome, email, data_de_criacao, ultima_atualizacao, status)
+VALUES
+('03037334118', 'Onias da Rocha Filho', 'onias.filho@gmail.com', now(), now(), '1');
+
+INSERT INTO dispositivo
+(numero, imei, tipo, status)
+VALUES
+('981522040', '123456789123456', '1', '1');

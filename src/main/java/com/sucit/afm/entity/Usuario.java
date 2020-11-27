@@ -1,8 +1,6 @@
 package com.sucit.afm.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -32,12 +30,13 @@ public class Usuario {
     @UpdateTimestamp
     private LocalDateTime ultimaAtualizacao;
     private String status;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "dispositivo_usuario",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "dispositivo_id")
     )
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Dispositivo> dispositivos;
 
 
