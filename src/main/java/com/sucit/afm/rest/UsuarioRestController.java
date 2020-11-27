@@ -3,15 +3,14 @@ package com.sucit.afm.rest;
 import com.sucit.afm.entity.Usuario;
 import com.sucit.afm.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class UsuarioRestController {
 
-    UsuarioService service;
+    private UsuarioService service;
 
     @Autowired
     public UsuarioRestController(UsuarioService service) {
@@ -22,4 +21,39 @@ public class UsuarioRestController {
     public List<Usuario> listarTodos(){
         return service.listarTodos();
     }
+
+    @GetMapping("/api/usuarios/{usuarioId}")
+    public Usuario buscaUsuario(@PathVariable int usuarioId){
+        Usuario u1 = service.acharPorId(usuarioId);
+
+        if(u1 == null){
+            throw new RuntimeException("Usuário não encontrado - " + usuarioId);
+        }
+
+        return  u1;
+    }
+
+    @PostMapping("/api/usuarios")
+    public Usuario salvarUsuario(@RequestBody Usuario usuario){
+        usuario.setId(0);
+
+        service.salvar(usuario);
+        return usuario;
+    }
+
+    @PutMapping("/api/usuarios")
+    public Usuario atualizaUsuario(@RequestBody Usuario usuario){
+        service.salvar(usuario);
+        return usuario;
+    }
+
+    @DeleteMapping("/api/usuarios/{usuarioId}")
+    public int deletaUsuario(@PathVariable int usuarioId){
+        service.deletarPorId(usuarioId);
+        return usuarioId;
+    }
+
+
+
+
 }

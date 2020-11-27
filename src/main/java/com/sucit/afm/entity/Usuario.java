@@ -1,11 +1,14 @@
 package com.sucit.afm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +23,14 @@ public class Usuario {
     private String cpf;
     private String nome;
     private String email;
-    @Column(name = "data_de_criacao")
+    @Column(name="data_de_criacao", nullable = false, updatable = false)
+    @JsonFormat(pattern="dd/MM/yyyy")
+    @CreationTimestamp
     private LocalDate dataDeCriacao;
     @Column(name = "ultima_atualizacao")
-    private LocalDate ultimaAtualizacao;
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm" , locale = "pt-BR", timezone = "Brazil/East")
+    @UpdateTimestamp
+    private LocalDateTime ultimaAtualizacao;
     private String status;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -45,12 +52,10 @@ public class Usuario {
 
     }
 
-    public Usuario(String cpf, String nome, String email, LocalDate dataDeCriacao, LocalDate ultimaAtualizacao, String status, String obs, List<Dispositivo> dispositivos) {
+    public Usuario(String cpf, String nome, String email, String status,List<Dispositivo> dispositivos) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
-        this.dataDeCriacao = dataDeCriacao;
-        this.ultimaAtualizacao = ultimaAtualizacao;
         this.status = status;
         this.dispositivos = dispositivos;
     }
@@ -105,16 +110,8 @@ public class Usuario {
         return dataDeCriacao;
     }
 
-    public void setDataDeCriacao(LocalDate dataDeCriacao) {
-        this.dataDeCriacao = dataDeCriacao;
-    }
-
-    public LocalDate getUltimaAtualizacao() {
+    public LocalDateTime getUltimaAtualizacao() {
         return ultimaAtualizacao;
-    }
-
-    public void setUltimaAtualizacao(LocalDate ultimaAtualizacao) {
-        this.ultimaAtualizacao = ultimaAtualizacao;
     }
 
     public String getStatus() {
