@@ -20,6 +20,7 @@ CREATE TABLE dispositivo (
   imei varchar(15),
   tipo varchar(1),
   status varchar(1),
+  nick varchar(50),
 
   PRIMARY KEY (id),
   UNIQUE (imei)
@@ -41,6 +42,6 @@ VALUES
 ('03037334118', 'Onias da Rocha Filho', 'onias.filho@gmail.com', now(), now(), '1');
 
 INSERT INTO dispositivo
-(numero, imei, tipo, status)
+(numero, imei, tipo, status, nick)
 VALUES
-('981522040', '123456789123456', '1', '1');
+('981522040', '123456789123456', '1', '1', 'Celular do Onias');

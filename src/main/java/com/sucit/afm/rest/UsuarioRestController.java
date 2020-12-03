@@ -1,8 +1,11 @@
 package com.sucit.afm.rest;
 
+import com.sucit.afm.entity.Dispositivo;
 import com.sucit.afm.entity.Usuario;
+import com.sucit.afm.service.DispositivoService;
 import com.sucit.afm.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +14,9 @@ import java.util.List;
 public class UsuarioRestController {
 
     private UsuarioService service;
+
+    @Autowired
+    private DispositivoService dservice;
 
     @Autowired
     public UsuarioRestController(UsuarioService service) {
@@ -52,6 +58,19 @@ public class UsuarioRestController {
         service.deletarPorId(usuarioId);
         return usuarioId;
     }
+
+    @PostMapping("/api/usuarios/dispositivo/{dispId}")
+    public HttpStatus salvarDispositivo(@RequestBody Usuario usuario, @PathVariable int dispId){
+
+        Dispositivo d1 = dservice.acharPorId(dispId);
+
+        usuario.addDispositivo(d1);
+
+        service.salvar(usuario);
+
+        return HttpStatus.OK;
+    }
+
 
 
 

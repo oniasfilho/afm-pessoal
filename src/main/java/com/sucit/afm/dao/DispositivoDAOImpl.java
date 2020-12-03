@@ -49,8 +49,7 @@ public class DispositivoDAOImpl implements DispositivoDAO{
     @Override
     public void deletarPorId(int id) {
         Session s = entityManager.unwrap(Session.class);
-
-        Dispositivo d1 = s.get(Dispositivo.class, id);
+        Dispositivo d1 = s.find(Dispositivo.class, id);
         s.delete(d1);
     }
 }

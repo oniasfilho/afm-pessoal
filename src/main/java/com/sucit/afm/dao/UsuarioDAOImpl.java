@@ -1,5 +1,6 @@
 package com.sucit.afm.dao;
 
+import com.sucit.afm.entity.Dispositivo;
 import com.sucit.afm.entity.Usuario;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -39,6 +40,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public void salvar(Usuario usuario) {
         Session s = em.unwrap(Session.class);
+
 
         s.saveOrUpdate(usuario);
     }
