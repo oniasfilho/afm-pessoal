@@ -32,7 +32,7 @@ public class Usuario {
     @UpdateTimestamp
     private LocalDateTime ultimaAtualizacao;
     private String status;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "dispositivo_usuario",
             joinColumns = @JoinColumn(name = "usuario_id"),

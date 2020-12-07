@@ -20,7 +20,7 @@ public class Dispositivo {
     private String tipo;
     private String status;
     private String nick;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "dispositivo_usuario",
             joinColumns = @JoinColumn(name = "dispositivo_id"),
