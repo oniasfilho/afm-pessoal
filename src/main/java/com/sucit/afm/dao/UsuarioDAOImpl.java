@@ -1,6 +1,5 @@
 package com.sucit.afm.dao;
 
-import com.sucit.afm.entity.Dispositivo;
 import com.sucit.afm.entity.Usuario;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -51,7 +50,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
         Usuario u1 = s.find(Usuario.class, id);
 
-        s.delete(u1);
+        s.remove(u1);
 
     }
 }

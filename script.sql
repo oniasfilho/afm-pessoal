@@ -14,7 +14,7 @@ CREATE TABLE usuario (
   UNIQUE (cpf)
 );
 
-CREATE TABLE dispositivo (
+CREATE TABLE dispositivoPessoal (
   id SERIAL,
   numero varchar(20),
   imei varchar(15),
@@ -31,7 +31,7 @@ CREATE TABLE dispositivo_usuario(
   usuario_id integer NOT NULL,
 
   PRIMARY KEY(dispositivo_id, usuario_id),
-  FOREIGN KEY(dispositivo_id) REFERENCES dispositivo(id),
+  FOREIGN KEY(dispositivo_id) REFERENCES dispositivoPessoal(id),
   FOREIGN KEY(usuario_id) REFERENCES usuario(id)
 );
 
@@ -41,7 +41,7 @@ INSERT INTO usuario
 VALUES
 ('03037334118', 'Onias da Rocha Filho', 'onias.filho@gmail.com', now(), now(), '1');
 
-INSERT INTO dispositivo
+INSERT INTO dispositivoPessoal
 (numero, imei, tipo, status, nick)
 VALUES
 ('981522040', '123456789123456', '1', '1', 'Celular do Onias');

@@ -1,6 +1,5 @@
 package com.sucit.afm.dao;
 
-import com.sucit.afm.entity.Dispositivo;
 import com.sucit.afm.entity.Usuario;
 
 import java.util.List;
