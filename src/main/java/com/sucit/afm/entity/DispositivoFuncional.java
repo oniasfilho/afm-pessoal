@@ -2,6 +2,7 @@ package com.sucit.afm.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -11,11 +12,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "dispositivo_funcional")
-@JsonIdentityInfo( scope = DispositivoFuncional.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Data
-@DynamicUpdate
 public class DispositivoFuncional {
     @Id
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String numero;
@@ -25,7 +27,7 @@ public class DispositivoFuncional {
     @OneToMany(mappedBy = "dispositivoFuncional",
                 cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                             CascadeType.DETACH, CascadeType.REFRESH})
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
     private List<Usuario> usuarios;
 
 
