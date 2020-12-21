@@ -36,7 +36,6 @@ public class UsuarioRestController {
 
     @GetMapping("/api/usuarios")
     public List<Usuario> listarTodos(){
-        logger.trace("Chegou na listagem de usuarios");
 
 
         return service.listarTodos();

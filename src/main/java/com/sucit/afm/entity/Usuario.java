@@ -17,7 +17,9 @@ import java.util.List;
 @Table(name = "usuario")
 @JsonIdentityInfo(scope = Usuario.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Data
-@DynamicUpdate
+@JsonPropertyOrder({"id", "nome", "cpf"})
+@JsonRootName(value = "usuario")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,7 @@ public class Usuario {
     private DispositivoPessoal dispositivoPessoal;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "dispositivo_funcional")
-//    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference(alwaysAsId = true)
+
     private DispositivoFuncional dispositivoFuncional;
 }

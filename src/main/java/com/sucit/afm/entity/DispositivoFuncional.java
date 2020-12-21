@@ -1,9 +1,6 @@
 package com.sucit.afm.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -13,6 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "dispositivo_funcional")
 @Data
+@JsonRootName(value = "dispositivo_funcional")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DispositivoFuncional {
     @Id
     @JsonIdentityInfo(
